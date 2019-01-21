@@ -6,7 +6,7 @@ FROM php:7.3.1-fpm
 #     && docker-php-ext-enable imagick \
 #     && docker-php-ext-install mcrypt pdo_mysql
 
-RUN apt-get update && apt-get install -y mysql-client \
+RUN apt-get update && apt-get install -y mysql-client supervisor \
     && docker-php-ext-install pdo_mysql && docker-php-ext-install mysqli
 
 # RUN mkdir -p /var/www/public
