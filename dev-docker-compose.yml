@@ -9,15 +9,25 @@ services:
     networks:
       - backend
     working_dir: /var/www
+    depends_on:
+      - database
+      - redis-server
+    links:
+      - redis-server
+      - web
     volumes:
       - ./:/var/www
     environment:
       - 'DB_PORT=3306'
       - 'DB_HOST=database'
-      - 'REDIS_HOST=redis'
+      - 'REDIS_HOST=redis-server'
       - 'REDIS_PASSWORD=null'
       - 'REDIS_PORT=6379'
-  
+      - 'CACHE_DRIVER=redis'
+      - 'QUEUE_CONNECTION=redis'
+      - 'SESSION_DRIVER=redis'
+      - 'SESSION_LIFETIME=120'
+
   # The Web Server
   web:
     build:
@@ -32,8 +42,14 @@ services:
     ports:
       - 8080:80
   
-  redis:
-    image: redis:alpine
+  redis-server:
+    build:
+      context: ./
+      dockerfile: redis.Dockerfile
+    networks:
+      - backend
+    ports:
+      - 6379:6379
 
   # The Database
   database:
