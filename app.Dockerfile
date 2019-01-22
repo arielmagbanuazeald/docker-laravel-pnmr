@@ -9,8 +9,8 @@ FROM php:7.3.1-fpm
 RUN apt-get update && apt-get install -y mysql-client supervisor \
     && docker-php-ext-install pdo_mysql && docker-php-ext-install mysqli
 
-# RUN mkdir -p /var/www/public
+WORKDIR /var/www
 
-# WORKDIR /var/www
+COPY ./.env.example ./.env
 
-# COPY ./hello.php ./public
+# CMD /install.sh
