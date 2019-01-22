@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,5 +19,9 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return ['awts' => 'ggness'];
+});
+
+Route::get('/users', function () {
+    return User::all();
 });
 
