@@ -19,5 +19,3 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 WORKDIR /var/www
 
 COPY ./.env.example ./.env
-
-# CMD /install.sh
